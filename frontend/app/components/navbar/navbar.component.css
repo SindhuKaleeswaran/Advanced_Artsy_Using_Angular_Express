@@ -1,0 +1,5 @@
+.nav-link.bg-active {
+    background-color: rgba(1,68,134,255) !important;
+    color: white !important;
+    border-radius: 5px;
+  }

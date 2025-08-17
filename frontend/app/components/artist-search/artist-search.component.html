@@ -1,0 +1,65 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
+<div class="input-group m-4 mx-auto w-75">
+    <input type="text" class="form-control" [(ngModel)]="artistName" [(ngModel)]="searchText" placeholder="Please enter an artist name."
+      aria-label="Recipient's username" aria-describedby="button-addon2" (keydown.enter)="onArtistSearch()">
+    <button [disabled]="!searchText.trim() || isLoading" class="btn btn-outline-secondary" style="background-color: rgba(1,68,134,255); color: white;" 
+      type="button" id="button-addon2" (click)="onArtistSearch()">
+      Search
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    </button>
+    <button [disabled]="!searchText.trim()" class="btn btn-outline-secondary" style="background-color: rgba(97,108,116,255); color: white;" 
+      type="button" id="button-addon2"  routerLink="/#" (click)="onClear()">Clear</button>
+  </div>
+  
+  <div *ngIf="noArtistsFound" class="alert alert-danger m-4 mx-auto w-75" role="alert">
+    No such artists.
+  </div>
+  
+  <div *ngIf="!noArtistsFound && artists.length > 0">
+    <div class="scroll-container m-4 mx-auto w-75">
+      <div class="card mx-1 btn m-0 p-0 artist-card" *ngFor="let artist of artists" 
+        style="width: 14rem; height: auto; display: flex;" (click)="artistInfo(artist.id)">
+        <div style="position: relative;">
+          <img [src]="artist.image" class="card-img-top" alt="{{ artist.name }}" (error)="setDefaultImage($event)"/>
+          <ng-container *ngIf="isLoggedIn">
+            <i class="fa-regular fa-star" 
+              [ngClass]="{'fa-star': true, 'fa-solid': artist.isFavourite, 'fa-regular': !artist.isFavourite}"
+              [ngStyle]="{'color': artist.isFavourite ? 'gold' : 'white'}"
+              style="position: absolute; top: 5px; right: 5px; font-size: 1.5rem; 
+              background-color: rgba(1,68,134,255); color: white; border-radius: 50%; padding: 5px;"
+              (click)="onClickFav(artist)">
+            </i>
+          </ng-container>
+        </div>
+        <div class="card-body m-0 p-0" style="color: white; height: auto;" 
+          [style.backgroundColor]="selectedArtistID === artist.id ? 'rgba(1,68,134,255)' : 'rgba(18,37,51,255)'">
+          <h5 class="card-title">{{ artist.name }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="btn-group mx-auto m-4 w-75 d-flex justify-content-center" role="group" aria-label="Basic example" *ngIf="selectedArtistID">
+    <button type="button" class="btn" (click)="changeTab('artistDetails')"
+      [ngStyle]="{
+        'background-color': options === 'artistDetails' ? 'rgba(1,68,134,255)' : 'white',
+        'color': options === 'artistDetails' ? 'white' : 'rgba(1,68,134,255)'
+      }">Artist Info</button>
+    <button type="button" class="btn" (click)="changeTab('artistWorks')"
+      [ngStyle]="{
+        'background-color': options === 'artistWorks' ? 'rgba(1,68,134,255)' : 'white',
+        'color': options === 'artistWorks' ? 'white' : 'rgba(1,68,134,255)'
+      }">Artworks</button>
+  </div>
+  
+  <!-- Show Artist Info by Default -->
+  <div *ngIf="options === 'artistDetails'">
+    <app-artist-info></app-artist-info>
+  </div>
+  
+  <!-- Show Artist Works when selected -->
+  <div *ngIf="options === 'artistWorks'">
+    <app-artist-works></app-artist-works>
+  </div>

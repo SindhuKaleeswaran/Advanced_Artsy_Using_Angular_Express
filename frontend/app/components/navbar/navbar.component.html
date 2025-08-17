@@ -1,0 +1,44 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Artist Search</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'bg-active': activeLink === 'search'}" aria-current="page" href="#" (click)="setActive('search')">Search</a>
+            </li>
+              <ng-container *ngIf="isLoggedIn; else loggedOut">
+              <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'bg-active': activeLink === 'favourites'}" routerLink="/favourites" (click)="setActive('favourites')">Favourites</a>              </li>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" 
+                data-bs-toggle="dropdown" aria-expanded="false" style="width:auto; margin-right: 1%;">
+                  <img [src]="icon" alt="User Icon" style="height: 2rem; width: 2rem; border-radius: 50%;">
+                  {{ fullname }}
+                </button>
+                <div class="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdownMenu2" style="width:auto; margin-right: 1%;">
+                  <a class="nav-link" style="color: red; font-size: medium;" (click)="deleteUser()">Delete Account</a>
+                  <a class="nav-link" style="color: blue; font-size: medium;" (click)="logout()">Logout</a>
+                </div>
+              </div>              
+                
+              </ng-container>
+          
+              <ng-template #loggedOut>
+                <li class="nav-item">
+                  <a class="nav-link" [ngClass]="{'bg-active': activeLink === 'login'}" routerLink="/login" (click)="setActive('login')">Log in</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [ngClass]="{'bg-active': activeLink === 'register'}" routerLink="/register" (click)="setActive('register')">Register</a>
+                </li>
+              </ng-template>
+            
+        </ul>
+      </div>
+    </div>
+</nav>
+
+<app-notifications></app-notifications> 
+<router-outlet></router-outlet>

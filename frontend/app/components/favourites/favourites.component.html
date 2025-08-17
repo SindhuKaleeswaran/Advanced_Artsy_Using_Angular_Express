@@ -1,0 +1,26 @@
+  <div class = "text-center mx-auto w-75 pb-5 spinner-container">
+    <span *ngIf="isLoading" class="spinner-border" role="status" aria-hidden="true"></span>
+  </div>
+<div *ngIf="noFavsFound" class="alert alert-danger m-4 mx-auto w-75" role="alert">
+  No favourite artists
+</div>
+
+<div class="container pb-3 m-4 mx-auto w-75" style="text-align: justify;">
+    <div *ngFor="let artist of favArtists">
+      <div class="card bg-dark text-white" (click)="navigateToArtistDetails(artist.id)">
+        <img [src]="artist.thumbnail" class="card-img" alt="..."
+             style="filter: blur(3px) brightness(50%); object-fit: cover;"
+             (error)="setDefaultImage($event)">
+        <div class="card-img-overlay">
+          <div style="padding-bottom: 40px;">
+            <h4 class="card-title">{{ artist.name }}</h4>
+            <div class="card-text">{{ artist.birthday }} - {{ artist.deathday }}</div>
+            <div class="card-text">{{ artist.nationality }}</div>
+          </div>
+          <a style="position: absolute; bottom: 10px; right: 10px; text-decoration: underline;" (click)="onRemove(artist.id); $event.stopPropagation()">Remove</a>
+          <div style=" position: absolute; bottom: 10px;" class="card-text" id="timer">{{ artist.timer }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,12 @@
+.bg-color {
+    background-color: rgba(1,68,134,255)!important;
+  }
+
+  .card-body:hover {
+    background-color: rgba(1,68,134,255) !important;
+    cursor: pointer;
+  }
+  
+  .card-body.bg-color:hover {
+    background-color: rgba(1,68,134,255) !important;
+  }

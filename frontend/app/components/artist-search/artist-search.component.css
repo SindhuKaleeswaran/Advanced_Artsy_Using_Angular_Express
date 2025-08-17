@@ -1,0 +1,26 @@
+.scroll-container {
+    display: flex;
+    overflow-x: auto;
+  }
+  .card {
+    flex: 0 0 auto;
+  }
+  .favourite {
+    color: gold;
+  }
+  .bg-light {
+    background-color: lightblue !important;
+  }
+  
+  .bg-dark {
+    background-color: rgba(18,37,51,255) !important;
+  }
+  
+  .card {
+    transition: background-color 0.3s ease;
+  }
+
+  .artist-card:hover .card-body{
+    background-color: rgba(1,68,134,255) !important;
+  }
+  

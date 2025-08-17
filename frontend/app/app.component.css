@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.design_header{
+    background-color: #ececec;
+    width : 99%;   
+    height: 50px;
+    font-family: arial;
+    display: flex;
+    align-items: center;
+    font-size: large;
+    padding-left: 1%;
+}
+.design_footer{
+    font-family: arial;
+    height:50px;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    background-color: #122533;
+    text-align: center;
+    color: white;
+    display: inline;
+}
+.logo{
+    height :20px;
+    width: 20px;
+    display: inline;
+    margin-top: 15px;
+    vertical-align: text-bottom;
+}
+#artsy_footer{
+    color: white;
+}

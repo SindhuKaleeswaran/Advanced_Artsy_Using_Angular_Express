@@ -1,0 +1,41 @@
+.art-image {
+    width: 60px;
+    height: 50px;
+    object-fit: cover;
+  }
+  
+  .art-details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+  }
+  
+  .modal-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .btn-close {
+    margin-left: auto;
+  }
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+.custom-btn {
+  background-color: #ececec;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.custom-btn:hover {
+  background-color: rgba(1,68,134,255);
+  color: white;
+}
+
+.custom-btn:active {
+  background-color: rgba(1,68,134,255);
+  color: white;
+}

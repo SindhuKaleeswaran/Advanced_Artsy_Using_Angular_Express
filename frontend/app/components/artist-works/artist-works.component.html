@@ -1,0 +1,53 @@
+<div *ngIf="noArtistworksFound" class="alert alert-danger m-4 mx-auto w-75" role="alert">
+  No artworks.
+  </div>
+<div class="scroll-container m-4 mx-auto w-75 pb-5" style="display: flex; flex-wrap: wrap; gap: 1rem;">
+  <div class = "text-center spinner-container">
+    <span *ngIf="isLoading" class="spinner-border" role="status" aria-hidden="true"></span>
+  </div>
+  <div *ngIf="noCategoryFound" class="alert alert-danger m-4 mx-auto w-75" role="alert">
+    No Categories.
+  </div>
+    <div class="card mx-1 m-0 p-0" *ngFor="let works of artworkDetail" 
+    style="width: 16rem; height: auto; display:flex;">
+      <img [src]="works.artworkImage" class="card-img-top" alt="{{ works.artworkTitle }}"
+          (error)="setDefaultImage($event)">
+      <div class="card-body m-0 p-0" style="height: auto;">
+        <h5 class="card-title"></h5>
+        <p class="card-text" style="text-align: center;">{{ works.artworkTitle }}, {{works.artworkDate}}</p>
+        <button href="#" class="btn mx-auto w-100 d-flex justify-content-center custom-btn"
+        type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onClickArtwork(works.artworkID)">
+        View Categories
+        </button>
+      </div>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 65%;">
+          <div class="modal-content" >
+            <div class = "text-center">
+              <span *ngIf="isLoading" class="spinner-border" role="status" aria-hidden="true"></span>
+            </div>
+            <div class="modal-header d-flex align-items-center">
+              <img [src]="works.artworkImage" class="art-image" alt="{{ works.artworkTitle }}" (error)="setDefaultImage($event)">
+              <div class="art-details ms-2">
+                <h5 class="modal-title" id="exampleModalLabel" style="font-size:1vw;">{{ works.artworkTitle }}</h5>
+                <h6 class="modal-title" id="exampleModalLabel" style="font-size:1vw;">{{ works.artworkDate }}</h6>
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="display: flex; flex-wrap: wrap; gap: 1rem;">
+              <div class="card mx-1 m-0 p-0" *ngFor="let cat of artworkCategories"
+              style="width: 13rem; height: auto; display: flex;">
+              <img [src]="cat.categoryThumbnail" class="card-img-top" alt="{{ cat.artworkTitle }}"
+                  (error)="setDefaultImage($event)" style="height: 200px;">
+              <div class="card-body m-0 p-0" style="height: auto;">
+                <h5 class="card-title"></h5>
+                <p class="card-text" style="text-align: center;">{{ cat.categoryName }}</p>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
